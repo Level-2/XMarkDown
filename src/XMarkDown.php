@@ -5,29 +5,18 @@ class XMarkDown {
 	private $root;
 	private $document;
 
-	public function __construct($markdown) {
+	public function __construct($markdown, \DomDocument $document) {
 		//Replace windows line endings with unix line endings
 		//And fix code blocks
 		$this->markdown = str_replace(["\r\n", '```'], ["\n", "```\n"], trim($markdown));
-
-		$this->document = new \DomDocument();
+		$this->document = $document;
+		
 		$this->root = $this->document->createElement('root');
-
 		$this->document->appendChild($this->root);
 	}
 
-	public function parse() {
-		//Register the block formats
-		//TODO: Allow these to be edited by DI
-		$blockFormats = [
-			new Heading('=', 'h1', $this->document, $this->root),
-			new Heading('-', 'h2', $this->document, $this->root),
-			new HeadingStyle2($this->document, $this->root),
-			new Code($this->document, $this->root),
-			new ListMD($this->document, $this->root),
-			new Paragraph($this->document, $this->root)
-		];
-
+	public function parse($blockFormats) {
+		
 		$blocks = explode("\n\n", $this->markdown);
 
 		for ($i = 0; $i < count($blocks); $i++) {

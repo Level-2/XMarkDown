@@ -2,14 +2,13 @@
 namespace XMarkDown;
 class ListMD implements Block, NeedsClosing {
 	private $document;
-	private $root;
 	private $items = [];
 	private $open = false;
 	private $blocks = 0;
 
-	public function __construct(\DomDocument $document, \DomElement $root) {
+	public function __construct(\DomDocument $document, $format) {
 		$this->document = $document;
-		$this->root = $root;
+		$this->format = $format;
 	}
 
 	public function parse($block) {
@@ -87,7 +86,7 @@ class ListMD implements Block, NeedsClosing {
 			$ol->appendChild($li);
 		}
 
-		$this->root->appendChild($ol);
+		$this->document->documentElement->appendChild($ol);
 		$this->items = [];
 		$this->open = false;
 		$this->blocks = 0;
@@ -95,7 +94,8 @@ class ListMD implements Block, NeedsClosing {
 
 	private function appendNested($item, $li) {
 		if ($item['nested'] !== '') {
-			$parser = new XMarkDown($item['nested']);
+			$format = $this->format;
+			$parser = new $format($item['nested']);
 			$nested = $parser->parse();
 
 			foreach ($nested->documentElement->childNodes as $child) {

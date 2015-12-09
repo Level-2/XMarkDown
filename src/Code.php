@@ -1,13 +1,11 @@
 <?php
 namespace XMarkDown;
 class Code implements Block {
-	private $root;
 	private $document;
 	private $codeStr = '';
 	private $open = false;
 
-	public function __construct(\DomDocument $document, \DomElement $root) {
-		$this->root = $root;
+	public function __construct(\DomDocument $document) {
 		$this->document = $document;
 	}
 
@@ -47,7 +45,7 @@ class Code implements Block {
 
 	private function complete() {
 		//When complete, build a <pre> tag with the current code string
-		$this->root->appendChild($this->document->createElement('pre', $this->codeStr));
+		$this->document->documentElement->appendChild($this->document->createElement('pre', $this->codeStr));
 		//Clear the code string and mark the tag as closed
 		$this->codeStr = '';
 		$this->open = false;

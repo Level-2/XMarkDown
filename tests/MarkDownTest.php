@@ -21,7 +21,7 @@ Paragraph two
 		';
 
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 
@@ -44,7 +44,7 @@ Heading
 		';
 
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 
@@ -63,7 +63,7 @@ This is **bold** in a paragraph
 		';
 
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 
@@ -82,7 +82,7 @@ This is __bold__ in a paragraph
 		';
 
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 
@@ -101,7 +101,7 @@ This is *italic* in a paragraph
 		';
 
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 
@@ -119,7 +119,7 @@ This is _italic_ in a paragraph
 		';
 
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 
@@ -138,7 +138,7 @@ This is `code` in a paragraph
 		';
 
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 
@@ -156,7 +156,7 @@ This is ** bold and *italic* ** in a paragraph
 		';
 
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 
@@ -173,7 +173,7 @@ This is `code but **this is not bold** code` in a paragraph
 		';
 
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 
@@ -189,7 +189,7 @@ Heading **with** bold
 ---------------------
 		';
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 
@@ -214,7 +214,7 @@ function code() {
 paragraph 2
 ';
 	
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 		$this->assertEquals($this->stripTabs('
@@ -248,7 +248,7 @@ $x = 1;
 paragraph 2
 ';
 	
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 		$this->assertEquals($this->stripTabs('
@@ -271,7 +271,7 @@ $x = 1;
 ```
 ';
 	
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 		$this->assertEquals($this->stripTabs('
@@ -295,7 +295,7 @@ paragraph
 paragraph
 		';
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 		$this->assertEquals($this->stripTabs('
@@ -326,7 +326,7 @@ paragraph
 paragraph
 		';
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 		$this->assertEquals($this->stripTabs('
@@ -359,7 +359,7 @@ paragraph
 paragraph
 		';
 
-		$XMarkDown = new \XMarkDown\XMarkDown($markdown);
+		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
 		$this->assertEquals($this->stripTabs('

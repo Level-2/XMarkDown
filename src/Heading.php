@@ -1,15 +1,13 @@
 <?php
 namespace XMarkDown;
 class Heading implements Block {
-	private $root;
 	private $tag;
 	private $char;
 	private $document;
 
-	public function __construct($char, $tag, \DomDocument $document, \DomElement $root) {
+	public function __construct($char, $tag, \DomDocument $document) {
 		$this->char = $char;
 		$this->tag = $tag;
-		$this->root = $root;
 		$this->document = $document;
 	}
 
@@ -19,7 +17,7 @@ class Heading implements Block {
 			$element = $this->document->createElement($this->tag);
 			$inline = new Inline($this->document);
 			$inline->inject($element, $lines[0]);
-			$this->root->appendChild($element);
+			$this->document->documentElement->appendChild($element);
 			return Block::MATCH;
 		}
 	}

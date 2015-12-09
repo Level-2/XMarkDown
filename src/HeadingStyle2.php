@@ -1,11 +1,9 @@
 <?php
 namespace XMarkDown;
 class HeadingStyle2 implements Block {
-	private $root;
 	private $document;
 
-	public function __construct(\DomDocument $document, \DomElement $root) {
-		$this->root = $root;
+	public function __construct(\DomDocument $document) {
 		$this->document = $document;
 	}
 
@@ -18,7 +16,7 @@ class HeadingStyle2 implements Block {
 
 		if ($pos == 0) return false;
 		else {
-			$this->root->appendChild($this->document->createElement('h' . $pos+1, substr($block[0], $pos+1)));
+			$this->document->documentElement->appendChild($this->document->createElement('h' . $pos+1, substr($block[0], $pos+1)));
 			return Block::MATCH;
 		}
 	}

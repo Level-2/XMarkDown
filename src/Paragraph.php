@@ -1,11 +1,9 @@
 <?php
 namespace XMarkDown;
 class Paragraph implements Block {
-	private $root;
 	private $document;
 
-	public function __construct(\DomDocument $document, \DomElement $root) {
-		$this->root = $root;
+	public function __construct(\DomDocument $document) {
 		$this->document = $document;
 	}
 
@@ -13,7 +11,7 @@ class Paragraph implements Block {
 		$p = $this->document->createElement('p');
 		$inline = new Inline($this->document);
 		$inline->inject($p, $block);
-		$this->root->appendChild($p);
+		$this->document->documentElement->appendChild($p);
 		return Block::MATCH;
 	}
 }
