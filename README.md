@@ -1,7 +1,13 @@
 # XMarkDown
-XMarkDown is an extensible PHP markdown parser that parses markdown into a usable DomDocument
 
-This is more of an experiement than a useful project, I wanted to see if it was possible to parse markdown:
+XMarkDown was originally concieved as a way of demonstrating the use of OOP for a task that is often touted as the realm of procedural code: parsing a linear document. What could be more procedural than that?
 
-a) Without Regular Expressions
-b) And construct a DomDocument as the result
+This is an example of how OOP can be used to solve even the most seemingly "procedural" of problems.
+
+This is currently a work in progress but is most of the way towards becomming a full markdown parser.
+
+# Project Goals
+
+1. Parse MarkDown into a DomDocument object rather than focussing on string manipulation
+
+2. Don't rely on regular expressions
