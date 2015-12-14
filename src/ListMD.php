@@ -29,7 +29,7 @@ class ListMD implements Block, NeedsClosing {
 		}
 		else if ($this->open) {
 			if (strpos($block, "\t") === 0) {
-				$this->items['nested'] .= "\n\n" . $block;
+				$this->items[count($this->items)-1]['nested'] .= ' ' . $block;
 				$this->blocks++;
 				return Block::INCOMPLETE;
 			}
@@ -46,7 +46,7 @@ class ListMD implements Block, NeedsClosing {
 			if ($text = $this->isListItem($line)) {
 				$this->items[] = ['maintext' => trim($text), 'nested' => ''];
 			}
-			else if ($this->isNestedItem($line)) $this->items[count($this->items)-1]['nested'] .= "\n" . trim($line);
+			else if ($this->isNestedItem($line)) $this->items[count($this->items)-1]['nested'] .= ' ' . trim($line);
 			else $this->items[count($this->items)-1]['maintext'] .= ' ' . $line;
 		}
 	}

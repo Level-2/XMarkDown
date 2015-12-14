@@ -377,7 +377,7 @@ paragraph
 	}
 
 
-	
+
 	public function testUnorderedListAsterisk() {
 		$markdown = '
 
@@ -407,6 +407,62 @@ paragraph
 	}
 
 
+	public function testUnorderedListPlus() {
+		$markdown = '
+
+paragraph
+
++ One
++ Two
++ Three
+
+paragraph
+		';
+
+		$XMarkDown = new \XMarkDown\Standard($markdown);
+		$xml = $XMarkDown->parse()->saveXML();
+
+		$this->assertEquals($this->stripTabs('
+			<?xml version="1.0"?>
+			<root>
+			<p>paragraph</p>
+			<ul>
+				<li>One</li>
+				<li>Two</li>
+				<li>Three</li>
+			</ul>
+			<p>paragraph</p>
+		</root>'), $this->stripTabs($xml));
+	}
+
+
+	public function testUnorderedListHyphen() {
+		$markdown = '
+
+paragraph
+
+- One
+- Two
+- Three
+
+paragraph
+		';
+
+		$XMarkDown = new \XMarkDown\Standard($markdown);
+		$xml = $XMarkDown->parse()->saveXML();
+
+		$this->assertEquals($this->stripTabs('
+			<?xml version="1.0"?>
+			<root>
+			<p>paragraph</p>
+			<ul>
+				<li>One</li>
+				<li>Two</li>
+				<li>Three</li>
+			</ul>
+			<p>paragraph</p>
+		</root>'), $this->stripTabs($xml));
+	}
 
 	public function testListWithParagraphs() {
 		$markdown = '
@@ -475,5 +531,56 @@ paragraph
 			</ol>
 			<p>paragraph</p>
 		</root>'), $this->stripTabs($xml));	
+	}
+
+		public function testListMultiParagraphs() {
+		$markdown = '
+
+paragraph
+
+1. paragraph one
+paragraph one
+
+	paragraph two
+paragraph two
+
+2. paragraph one
+paragraph one
+
+	paragraph two
+paragraph two
+
+3. paragraph one
+paragraph one
+
+	paragraph two
+paragraph two
+
+paragraph
+		';
+
+		$XMarkDown = new \XMarkDown\Standard($markdown);
+		$xml = $XMarkDown->parse()->saveXML();
+
+		$this->assertEquals($this->stripTabs('
+			<?xml version="1.0"?>
+			<root>
+			<p>paragraph</p>
+			<ol>
+				<li>
+					<p>paragraph one paragraph one</p>
+					<p>paragraph two paragraph two</p>
+				</li>
+				<li>
+					<p>paragraph one paragraph one</p>
+					<p>paragraph two paragraph two</p>
+				</li>
+				<li>
+					<p>paragraph one paragraph one</p>
+					<p>paragraph two paragraph two</p>
+				</li>
+			</ol>
+			<p>paragraph</p>
+		</root>'), $this->stripTabs($xml));
 	}
 }
