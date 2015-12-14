@@ -1,21 +1,26 @@
 <?php
 namespace XMarkDown;
 class ListMD implements Block, NeedsClosing {
+
+	const TYPE_OL = 'ol';
+	const TYPE_UL = 'ul';
+
 	private $document;
 	private $items = [];
 	private $open = false;
 	private $blocks = 0;
+	private $type;
 
-	public function __construct(\DomDocument $document, $format) {
+	public function __construct(\DomDocument $document, $format, $type) {
 		$this->document = $document;
 		$this->format = $format;
+		$this->type = $type;
 	}
 
 	public function parse($block) {
 		$lines = explode("\n", $block);
 
-
-		if ($this->isListItem($lines[0])) { 
+		if ($this->isListItem($lines[0])) {
 			$this->open = true;
 			$this->blocks++;
 
@@ -30,10 +35,9 @@ class ListMD implements Block, NeedsClosing {
 			}
 			else {
 				$this->close();
-				return Block::NOMATCH;	
+				return Block::NOMATCH;
 			}
-			
-		} 
+		}
 		else return Block::NOMATCH;
 	}
 
@@ -43,7 +47,7 @@ class ListMD implements Block, NeedsClosing {
 				$this->items[] = ['maintext' => trim($text), 'nested' => ''];
 			}
 			else if ($this->isNestedItem($line)) $this->items[count($this->items)-1]['nested'] .= "\n" . trim($line);
-			else $this->items[count($this->items)-1]['maintext'] .= ' ' + $line;
+			else $this->items[count($this->items)-1]['maintext'] .= ' ' . $line;
 		}
 	}
 
@@ -56,6 +60,21 @@ class ListMD implements Block, NeedsClosing {
 	}
 
 	private function isListItem($str) {
+		if ($this->type === self::TYPE_UL) return $this->isListItemUL($str);
+		else if ($this->type === self::TYPE_OL) return $this->isListItemOL($str);
+	}
+
+	private function isListItemUL($str) {
+		$markers = ['+', '-', '*'];
+		$spaces = [' ', "\t"];
+
+		if (strlen(trim($str)) > 0 && in_array(trim($str)[0], $markers) && in_array(trim($str)[1], $spaces)) {
+			return trim($str, "\t\n " . implode($markers));
+		} 
+		else return false;
+	}
+
+	private function isListItemOL($str) {
 		$i = 0;
 		while ($i < 0 && $str[$i] == ' ') {
 			$str = substr($str, 1);
@@ -72,7 +91,7 @@ class ListMD implements Block, NeedsClosing {
 	public function close() {
 		if (empty($this->items)) return;
 
-		$ol = $this->document->createElement('ol');
+		$ol = $this->document->createElement($this->type);
 		foreach ($this->items as $item) {
 			
 			$li = $this->document->createElement('li');

@@ -13,8 +13,9 @@ class Standard {
 			new Heading('=', 'h1', $this->document),
 			new Heading('-', 'h2', $this->document),
 			new HeadingStyle2($this->document),
-			new Code($this->document),
-			new ListMD($this->document, self::class),
+			new Code($this->document),			
+			new ListMD($this->document, self::class, ListMD::TYPE_OL),
+			new ListMD($this->document, self::class, ListMD::TYPE_UL),
 			new Paragraph($this->document)
 		]);
 	}

@@ -312,6 +312,102 @@ paragraph
 	}
 
 
+	public function testMultilineList() {
+		$markdown = '
+
+paragraph
+
+1. One
+one
+2. Two
+two
+3. Three
+three
+
+paragraph
+		';
+
+		$XMarkDown = new \XMarkDown\Standard($markdown);
+		$xml = $XMarkDown->parse()->saveXML();
+
+		$this->assertEquals($this->stripTabs('
+			<?xml version="1.0"?>
+			<root>
+			<p>paragraph</p>
+			<ol>
+				<li>One one</li>
+				<li>Two two</li>
+				<li>Three three</li>
+			</ol>
+			<p>paragraph</p>
+		</root>'), $this->stripTabs($xml));
+	}
+
+	public function testMultilineListWithParagraph() {
+		$markdown = '
+
+paragraph
+
+1. One
+one
+
+2. Two
+two
+
+3. Three
+three
+
+paragraph
+		';
+
+		$XMarkDown = new \XMarkDown\Standard($markdown);
+		$xml = $XMarkDown->parse()->saveXML();
+
+		$this->assertEquals($this->stripTabs('
+			<?xml version="1.0"?>
+			<root>
+			<p>paragraph</p>
+			<ol>
+				<li><p>One one</p></li>
+				<li><p>Two two</p></li>
+				<li><p>Three three</p></li>
+			</ol>
+			<p>paragraph</p>
+		</root>'), $this->stripTabs($xml));
+	}
+
+
+	
+	public function testUnorderedListAsterisk() {
+		$markdown = '
+
+paragraph
+
+* One
+* Two
+* Three
+
+paragraph
+		';
+
+		$XMarkDown = new \XMarkDown\Standard($markdown);
+		$xml = $XMarkDown->parse()->saveXML();
+
+		$this->assertEquals($this->stripTabs('
+			<?xml version="1.0"?>
+			<root>
+			<p>paragraph</p>
+			<ul>
+				<li>One</li>
+				<li>Two</li>
+				<li>Three</li>
+			</ul>
+			<p>paragraph</p>
+		</root>'), $this->stripTabs($xml));
+	}
+
+
+
 	public function testListWithParagraphs() {
 		$markdown = '
 
