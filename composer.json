@@ -1,0 +1,20 @@
+{
+    "name": "level-2/xmarkdown",
+    "version": "1.0",
+    "description": "A new approach at templating",
+    "license": "BSD-2-Clause",
+    "homepage": "https://github.com/Level-2/XMarkDown",
+    "keywords": ["markdown parser"],
+    "authors": [
+    	{
+    		"name": "Tom Butler",
+    		"email": "tom@r.je"
+    	}
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "autoload": {
+    	"classmap": ["src/"]
+    }
+}
