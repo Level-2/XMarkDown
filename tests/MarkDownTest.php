@@ -207,13 +207,13 @@ Heading **with** bold
 paragraph 1
 
 ```
-function code() {					
+function code() {
 }
 ```
 
 paragraph 2
 ';
-	
+
 		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
@@ -234,7 +234,7 @@ paragraph 1
 
 
 
-function code() {	
+function code() {
 
 
 $x = 1;
@@ -247,7 +247,7 @@ $x = 1;
 
 paragraph 2
 ';
-	
+
 		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
@@ -263,14 +263,14 @@ paragraph 2
 				$markdown = '
 
 ```
-function code() {	
+function code() {
 
 $x = 1;
 
 }
 ```
 ';
-	
+
 		$XMarkDown = new \XMarkDown\Standard($markdown);
 		$xml = $XMarkDown->parse()->saveXML();
 
@@ -501,8 +501,8 @@ paragraph
 
 1. One
 	1. One A
-	2. One B 
-	3. One C 
+	2. One B
+	3. One C
 
 2. Two
 
@@ -530,7 +530,7 @@ paragraph
 				<li><p>Three</p></li>
 			</ol>
 			<p>paragraph</p>
-		</root>'), $this->stripTabs($xml));	
+		</root>'), $this->stripTabs($xml));
 	}
 
 		public function testListMultiParagraphs() {
