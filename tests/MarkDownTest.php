@@ -583,4 +583,22 @@ paragraph
 			<p>paragraph</p>
 		</root>'), $this->stripTabs($xml));
 	}
+
+	public function testHeadingStyle2() {
+
+			$markdown = '
+# Heading
+			';
+
+
+			$XMarkDown = new \XMarkDown\Standard($markdown);
+			$xml = $XMarkDown->parse()->saveXML();
+
+
+			$this->assertEquals($this->stripTabs('
+				<?xml version="1.0"?>
+				<root>
+				<h1>Heading</h1>
+			</root>'), $this->stripTabs($xml));
+	}
 }

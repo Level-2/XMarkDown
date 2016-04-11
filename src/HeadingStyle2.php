@@ -16,7 +16,7 @@ class HeadingStyle2 implements Block {
 
 		if ($pos == 0) return false;
 		else {
-			$this->document->documentElement->appendChild($this->document->createElement('h' . $pos, substr($block[0], $pos+1)));
+			$this->document->documentElement->appendChild($this->document->createElement('h' . $pos, substr($block, $pos+1)));
 			return Block::MATCH;
 		}
 	}
