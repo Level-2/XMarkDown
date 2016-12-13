@@ -10,13 +10,13 @@ class HeadingStyle2 implements Block {
 
 	public function parse($block) {
 		$pos = 0;
-		while ($block[0][$pos] === '#') {
+		while ($block[$pos] === '#') {
 			$pos++;
 		}
 
 		if ($pos == 0) return false;
 		else {
-			$this->document->documentElement->appendChild($this->document->createElement('h' . $pos+1, substr($block[0], $pos+1)));
+			$this->document->documentElement->appendChild($this->document->createElement('h' . $pos, substr($block, $pos+1)));
 			return Block::MATCH;
 		}
 	}
