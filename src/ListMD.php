@@ -18,7 +18,7 @@ class ListMD implements Block, NeedsClosing {
 	}
 
 	public function parse($block) {
-		$lines = explode("\n", $block);
+		$lines = explode("\n", trim($block, "\r\n"));
 
 		if ($this->isListItem($lines[0])) {
 			$this->open = true;
@@ -28,7 +28,7 @@ class ListMD implements Block, NeedsClosing {
 			return Block::INCOMPLETE;
 		}
 		else if ($this->open) {
-			if (strpos($block, "\t") === 0) {
+			if (strpos($block, "\t") === 0 || strpos($block, "\n")) {
 				$this->items[count($this->items)-1]['nested'] .= ' ' . $block;
 				$this->blocks++;
 				return Block::INCOMPLETE;
