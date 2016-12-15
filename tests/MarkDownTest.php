@@ -29,8 +29,8 @@ Paragraph two
 			<?xml version="1.0"?>
 			<root>
 			<h1>Heading</h1>
-			<p>Paragraph oneParagraph one</p>
-			<p>Paragraph twoParagraph two</p>
+			<p>Paragraph one Paragraph one</p>
+			<p>Paragraph two Paragraph two</p>
 
 		</root>'), $this->stripTabs($xml));
 	}

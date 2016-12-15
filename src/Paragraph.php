@@ -10,7 +10,7 @@ class Paragraph implements Block {
 	public function parse($block) {
 		$p = $this->document->createElement('p');
 		$inline = new Inline($this->document);
-		$inline->inject($p, str_replace("\n", ' ', $block));
+		$inline->inject($p, str_replace("\n", ' ', trim($block)));
 		$this->document->documentElement->appendChild($p);
 		return Block::MATCH;
 	}
