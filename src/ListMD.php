@@ -46,7 +46,7 @@ class ListMD implements Block, NeedsClosing {
 			if ($text = $this->isListItem($line)) {
 				$this->items[] = ['maintext' => trim($text), 'nested' => ''];
 			}
-			else if ($this->isNestedItem($line)) $this->items[count($this->items)-1]['nested'] .= ' ' . trim($line);
+			else if ($this->isNestedItem($line)) $this->items[count($this->items)-1]['nested'] .= "\n" . trim($line);
 			else $this->items[count($this->items)-1]['maintext'] .= ' ' . $line;
 		}
 	}
@@ -115,6 +115,7 @@ class ListMD implements Block, NeedsClosing {
 		if ($item['nested'] !== '') {
 			$format = $this->format;
 			$parser = new $format($item['nested']);
+
 			$nested = $parser->parse();
 
 			foreach ($nested->documentElement->childNodes as $child) {
